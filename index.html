@@ -29,7 +29,7 @@
             border-radius: 4px;
         }
         button:active { background: #000; }
-        .btn-reset { grid-column: span 2; background: #888; }
+        .btn-reset { grid-column: span 2; background: #888; margin-top: 5px; }
     </style>
 </head>
 <body>
@@ -43,10 +43,11 @@
     </model-viewer>
 
     <div class="controls">
-        <button onclick="cambiar(0, 'Image_0.png')">Ruedas Cemento</button>
-        <button onclick="cambiar(1, 'Image_16.png')">Contratapa Cemento</button>
-        <button onclick="cambiar(2, 'Image_8.png')">Logos Cemento</button>
-        <button onclick="cambiar(4, 'Image_4.png')">Tapa Cemento</button>
+        <button onclick="cambiar(0, 'calco_rueda__baseColor.png')">Ruedas Cemento</button>
+        <button onclick="cambiar(1, 'contratapa_baseColor.png')">Contratapa Cemento</button>
+        <button onclick="cambiar(2, 'Logos_baseColor.png')">Logos Cemento</button>
+        <button onclick="cambiar(4, 'tapa_baseColor.png')">Tapa Cemento</button>
+        
         <button class="btn-reset" onclick="location.reload()">Resetear Todo</button>
     </div>
 </div>
@@ -54,32 +55,26 @@
 <script>
     async function cambiar(indice, archivo) {
         const visor = document.querySelector("#visor");
-        // Ruta directa a las imágenes en la raíz del repositorio
+        // Ajustado para buscar los archivos PNG en la raíz del repo
         const url = `https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/${archivo}`;
         
-        if (!visor.model) {
-            console.warn("El modelo aún no ha cargado.");
-            return;
-        }
+        if (!visor.model) return;
 
         try {
             const texture = await visor.createTexture(url);
             const material = visor.model.materials[indice];
             
             if (material) {
-                // Inyectamos la textura incluso si el material era color sólido en Blender
                 if (material.pbrMetallicRoughness.baseColorTexture) {
                     material.pbrMetallicRoughness.baseColorTexture.setTexture(texture);
                 } else {
                     material.pbrMetallicRoughness.setBaseColorTexture(texture);
                 }
-                
-                // Forzamos el factor de color a blanco para que la textura no se tiña
                 material.pbrMetallicRoughness.setBaseColorFactor([1, 1, 1, 1]);
-                console.log("Aplicado material " + indice + " con éxito.");
+                console.log("Cambio exitoso en material " + indice);
             }
         } catch (e) {
-            console.error("Error al aplicar la textura:", e);
+            console.error("Error al cargar la textura:", e);
         }
     }
 </script>
