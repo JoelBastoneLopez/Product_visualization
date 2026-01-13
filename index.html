@@ -29,86 +29,60 @@
             border-radius: 4px;
         }
         button:active { background: #000; }
+        .btn-reset { grid-column: span 2; background: #888; }
     </style>
 </head>
 <body>
 
-<div class="configurador-wrapper">
-    <div class="viewer-section">
-        <model-viewer id="visor" 
-            src="https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/retopo_go.glb" 
-            ar ar-modes="webxr scene-viewer quick-look" 
-            camera-controls shadow-intensity="1">
-            <button slot="ar-button" style="background: white; border-radius: 4px; border: none; position: absolute; top: 16px; right: 16px; padding: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
-                👋 VER EN AR
-            </button>
-        </model-viewer>
-    </div>
+<div class="wrapper">
+    <model-viewer id="visor" 
+        src="https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/retopo_go.glb" 
+        ar ar-modes="webxr scene-viewer quick-look" 
+        camera-controls 
+        shadow-intensity="1">
+    </model-viewer>
 
-    <div class="controls-section">
-        <h2>Personalización</h2>
-
-        <div class="categoria">
-            <label>Contratapa</label>
-            <div class="opciones">
-                <button onclick="location.reload()">Original</button>
-                <button class="cemento" onclick="cambiar(1, 'tapa_baseColor.png')">Cemento</button>
-            </div>
-        </div>
-
-        <div class="categoria">
-            <label>Tapa Principal</label>
-            <div class="opciones">
-                <button onclick="location.reload()">Original</button>
-                <button class="cemento" onclick="cambiar(4, 'contratapa_baseColor.png')">Cemento</button>
-            </div>
-        </div>
-
-        <div class="categoria">
-            <label>Logos</label>
-            <div class="opciones">
-                <button onclick="location.reload()">Original</button>
-                <button class="cemento" onclick="cambiar(2, 'Logos_baseColor.png')">Cemento</button>
-            </div>
-        </div>
-
-        <div class="categoria">
-            <label>Calco Ruedas</label>
-            <div class="opciones">
-                <button onclick="location.reload()">Original</button>
-                <button class="cemento" onclick="cambiar(0, 'calco_rueda__baseColor.png')">Cemento</button>
-            </div>
-        </div>
-
-        <button class="btn-reset" onclick="location.reload()">RESETEAR TODO</button>
+    <div class="controls">
+        <button onclick="cambiar(0, 'Image_0.png')">Ruedas Cemento</button>
+        <button onclick="cambiar(1, 'Image_16.png')">Contratapa Cemento</button>
+        <button onclick="cambiar(2, 'Image_8.png')">Logos Cemento</button>
+        <button onclick="cambiar(4, 'Image_4.png')">Tapa Cemento</button>
+        <button class="btn-reset" onclick="location.reload()">Resetear Todo</button>
     </div>
 </div>
 
 <script>
     async function cambiar(indice, archivo) {
-        const modelViewer = document.querySelector("#visor");
-        const url = `https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/op2/${archivo}`;
+        const visor = document.querySelector("#visor");
+        // Ruta directa a las imágenes en la raíz del repositorio
+        const url = `https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/${archivo}`;
         
-        if (!modelViewer.model) return;
+        if (!visor.model) {
+            console.warn("El modelo aún no ha cargado.");
+            return;
+        }
 
         try {
-            const texture = await modelViewer.createTexture(url);
-            const material = modelViewer.model.materials[indice];
+            const texture = await visor.createTexture(url);
+            const material = visor.model.materials[indice];
             
             if (material) {
+                // Inyectamos la textura incluso si el material era color sólido en Blender
                 if (material.pbrMetallicRoughness.baseColorTexture) {
                     material.pbrMetallicRoughness.baseColorTexture.setTexture(texture);
                 } else {
-                    material.pbrMetallicRoughness.baseColorTexture = { texture: texture };
+                    material.pbrMetallicRoughness.setBaseColorTexture(texture);
                 }
+                
+                // Forzamos el factor de color a blanco para que la textura no se tiña
                 material.pbrMetallicRoughness.setBaseColorFactor([1, 1, 1, 1]);
+                console.log("Aplicado material " + indice + " con éxito.");
             }
         } catch (e) {
-            console.error("Error cargando textura:", e);
+            console.error("Error al aplicar la textura:", e);
         }
     }
 </script>
 
 </body>
 </html>
-
