@@ -6,17 +6,14 @@
     <title>Configurador Go!</title>
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <style>
-        body { margin: 0; font-family: sans-serif; }
-        .wrapper { display: flex; flex-direction: column; height: 100vh; }
+        body { margin: 0; font-family: sans-serif; display: flex; flex-direction: column; height: 100vh; }
         model-viewer { width: 100%; flex: 1; background: #f4f4f4; }
         .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px; background: #fff; border-top: 1px solid #ddd; }
         button { padding: 12px; font-size: 11px; font-weight: bold; text-transform: uppercase; cursor: pointer; border: none; background: #333; color: white; }
-        button.cemento { background: #9da1a5; }
     </style>
 </head>
 <body>
 
-<div class="wrapper">
     <model-viewer id="visor" 
         src="https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/retopo_go.gltf" 
         ar ar-modes="webxr scene-viewer quick-look" 
@@ -24,32 +21,32 @@
     </model-viewer>
 
     <div class="controls">
-        <button class="cemento" onclick="cambiar(0, 'calco_rueda__baseColor.png')">Ruedas Cemento</button>
-        <button class="cemento" onclick="cambiar(1, 'tapa_baseColor.png')">Contratapa Cemento</button>
-        <button class="cemento" onclick="cambiar(2, 'Logos_baseColor.png')">Logos Cemento</button>
-        <button class="cemento" onclick="cambiar(4, 'contratapa_baseColor.png')">Tapa Cemento</button>
+        <button onclick="cambiar(0, 'Image_0.png')">Ruedas Cemento</button>
+        <button onclick="cambiar(1, 'Image_16.png')">Contratapa Cemento</button>
+        <button onclick="cambiar(2, 'Image_8.png')">Logos Cemento</button>
+        <button onclick="cambiar(4, 'Image_4.png')">Tapa Cemento</button>
     </div>
-</div>
 
-<script>
-    async function cambiar(indice, archivo) {
-        const visor = document.querySelector("#visor");
-        const url = `https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/op2/${archivo}`;
-        
-        if (!visor.model) return;
-        try {
-            const texture = await visor.createTexture(url);
-            const material = visor.model.materials[indice];
-            if (material) {
-                if (material.pbrMetallicRoughness.baseColorTexture) {
-                    material.pbrMetallicRoughness.baseColorTexture.setTexture(texture);
-                } else {
-                    material.pbrMetallicRoughness.baseColorTexture = { texture: texture };
+    <script>
+        async function cambiar(indice, archivo) {
+            const visor = document.querySelector("#visor");
+            // Ruta directa a la raíz del repo
+            const url = `https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/${archivo}`;
+            
+            if (!visor.model) return;
+            try {
+                const texture = await visor.createTexture(url);
+                const material = visor.model.materials[indice];
+                if (material) {
+                    if (material.pbrMetallicRoughness.baseColorTexture) {
+                        material.pbrMetallicRoughness.baseColorTexture.setTexture(texture);
+                    } else {
+                        material.pbrMetallicRoughness.baseColorTexture = { texture: texture };
+                    }
+                    material.pbrMetallicRoughness.setBaseColorFactor([1, 1, 1, 1]);
                 }
-                material.pbrMetallicRoughness.setBaseColorFactor([1, 1, 1, 1]);
-            }
-        } catch (e) { console.error(e); }
-    }
-</script>
+            } catch (e) { console.error(e); }
+        }
+    </script>
 </body>
 </html>
