@@ -33,49 +33,82 @@
 </head>
 <body>
 
-<div class="wrapper">
-    <model-viewer id="visor" 
-        src="https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/retopo_go.glb" 
-        ar ar-modes="webxr scene-viewer quick-look" 
-        camera-controls 
-        shadow-intensity="1">
-    </model-viewer>
+<div class="configurador-wrapper">
+    <div class="viewer-section">
+        <model-viewer id="visor" 
+            src="https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/retopo_go.glb" 
+            ar ar-modes="webxr scene-viewer quick-look" 
+            camera-controls shadow-intensity="1">
+            <button slot="ar-button" style="background: white; border-radius: 4px; border: none; position: absolute; top: 16px; right: 16px; padding: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                👋 VER EN AR
+            </button>
+        </model-viewer>
+    </div>
 
-    <div class="controls">
-        <button onclick="cambiar(0, 'Image_0.png')">Ruedas Cemento</button>
-        <button onclick="cambiar(1, 'Image_1.png')">Contratapa Cemento</button>
-        <button onclick="cambiar(2, 'Image_8.png')">Logos Cemento</button>
-        <button onclick="cambiar(4, 'Image_4.png')">Tapa Cemento</button>
+    <div class="controls-section">
+        <h2>Personalización</h2>
+
+        <div class="categoria">
+            <label>Contratapa</label>
+            <div class="opciones">
+                <button onclick="location.reload()">Original</button>
+                <button class="cemento" onclick="cambiar(1, 'tapa_baseColor.png')">Cemento</button>
+            </div>
+        </div>
+
+        <div class="categoria">
+            <label>Tapa Principal</label>
+            <div class="opciones">
+                <button onclick="location.reload()">Original</button>
+                <button class="cemento" onclick="cambiar(4, 'contratapa_baseColor.png')">Cemento</button>
+            </div>
+        </div>
+
+        <div class="categoria">
+            <label>Logos</label>
+            <div class="opciones">
+                <button onclick="location.reload()">Original</button>
+                <button class="cemento" onclick="cambiar(2, 'Logos_baseColor.png')">Cemento</button>
+            </div>
+        </div>
+
+        <div class="categoria">
+            <label>Calco Ruedas</label>
+            <div class="opciones">
+                <button onclick="location.reload()">Original</button>
+                <button class="cemento" onclick="cambiar(0, 'calco_rueda__baseColor.png')">Cemento</button>
+            </div>
+        </div>
+
+        <button class="btn-reset" onclick="location.reload()">RESETEAR TODO</button>
     </div>
 </div>
 
 <script>
     async function cambiar(indice, archivo) {
-        const visor = document.querySelector("#visor");
-        const url = `https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/${archivo}`;
+        const modelViewer = document.querySelector("#visor");
+        const url = `https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/op2/${archivo}`;
         
-        if (!visor.model) return;
+        if (!modelViewer.model) return;
 
         try {
-            const texture = await visor.createTexture(url);
-            const material = visor.model.materials[indice];
+            const texture = await modelViewer.createTexture(url);
+            const material = modelViewer.model.materials[indice];
             
             if (material) {
-                // Reemplazamos la textura en el canal base
                 if (material.pbrMetallicRoughness.baseColorTexture) {
                     material.pbrMetallicRoughness.baseColorTexture.setTexture(texture);
                 } else {
-                    // Si el material no tenía textura previa, la asignamos
                     material.pbrMetallicRoughness.baseColorTexture = { texture: texture };
                 }
-                // Forzamos el factor de color a blanco para que la imagen se vea real
                 material.pbrMetallicRoughness.setBaseColorFactor([1, 1, 1, 1]);
             }
         } catch (e) {
-            console.error("Error al aplicar la textura:", e);
+            console.error("Error cargando textura:", e);
         }
     }
 </script>
 
 </body>
 </html>
+
