@@ -9,7 +9,8 @@
         body { margin: 0; font-family: sans-serif; display: flex; flex-direction: column; height: 100vh; }
         model-viewer { width: 100%; flex: 1; background: #f4f4f4; }
         .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px; background: #fff; border-top: 1px solid #ddd; }
-        button { padding: 12px; font-size: 11px; font-weight: bold; text-transform: uppercase; cursor: pointer; border: none; background: #333; color: white; }
+        button { padding: 12px; font-size: 11px; font-weight: bold; text-transform: uppercase; cursor: pointer; border: none; background: #333; color: white; border-radius: 4px; }
+        button:active { background: #000; }
     </style>
 </head>
 <body>
@@ -17,7 +18,8 @@
     <model-viewer id="visor" 
         src="https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/retopo_go.gltf" 
         ar ar-modes="webxr scene-viewer quick-look" 
-        camera-controls shadow-intensity="1">
+        camera-controls shadow-intensity="1"
+        exposure="1">
     </model-viewer>
 
     <div class="controls">
@@ -30,8 +32,8 @@
     <script>
         async function cambiar(indice, archivo) {
             const visor = document.querySelector("#visor");
-            // Ruta directa a la raíz del repo
-            const url = `https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/${archivo}`;
+            // Forzamos la carga desde Githack para evitar bloqueos de caché
+            const url = `https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/${archivo}?v=${new Date().getTime()}`;
             
             if (!visor.model) return;
             try {
@@ -45,7 +47,7 @@
                     }
                     material.pbrMetallicRoughness.setBaseColorFactor([1, 1, 1, 1]);
                 }
-            } catch (e) { console.error(e); }
+            } catch (e) { console.error("Error:", e); }
         }
     </script>
 </body>
