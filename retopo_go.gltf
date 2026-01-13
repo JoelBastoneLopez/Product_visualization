@@ -389,7 +389,7 @@
 		{
 			"bufferView":4,
 			"componentType":5126,
-			"count":4139,
+			"count":4190,
 			"max":[
 				18.767532348632812,
 				54.954837799072266,
@@ -405,19 +405,19 @@
 		{
 			"bufferView":5,
 			"componentType":5126,
-			"count":4139,
+			"count":4190,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":6,
 			"componentType":5126,
-			"count":4139,
+			"count":4190,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":7,
 			"componentType":5123,
-			"count":17238,
+			"count":17520,
 			"type":"SCALAR"
 		},
 		{
@@ -550,98 +550,98 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":49668,
+			"byteLength":50280,
 			"byteOffset":34144,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":49668,
-			"byteOffset":83812,
+			"byteLength":50280,
+			"byteOffset":84424,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":33112,
-			"byteOffset":133480,
+			"byteLength":33520,
+			"byteOffset":134704,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":34476,
-			"byteOffset":166592,
+			"byteLength":35040,
+			"byteOffset":168224,
 			"target":34963
 		},
 		{
 			"buffer":0,
 			"byteLength":4644,
-			"byteOffset":201068,
+			"byteOffset":203264,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":4644,
-			"byteOffset":205712,
+			"byteOffset":207908,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":3096,
-			"byteOffset":210356,
+			"byteOffset":212552,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":4092,
-			"byteOffset":213452,
+			"byteOffset":215648,
 			"target":34963
 		},
 		{
 			"buffer":0,
 			"byteLength":141996,
-			"byteOffset":217544,
+			"byteOffset":219740,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":141996,
-			"byteOffset":359540,
+			"byteOffset":361736,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":94664,
-			"byteOffset":501536,
+			"byteOffset":503732,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":99168,
-			"byteOffset":596200,
+			"byteOffset":598396,
 			"target":34963
 		},
 		{
 			"buffer":0,
 			"byteLength":69696,
-			"byteOffset":695368,
+			"byteOffset":697564,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":69696,
-			"byteOffset":765064,
+			"byteOffset":767260,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":46464,
-			"byteOffset":834760,
+			"byteOffset":836956,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":42222,
-			"byteOffset":881224,
+			"byteOffset":883420,
 			"target":34963
 		}
 	],
@@ -653,7 +653,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":923448,
+			"byteLength":925644,
 			"uri":"retopo_go.bin"
 		}
 	]
