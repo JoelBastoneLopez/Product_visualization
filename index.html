@@ -1,0 +1,52 @@
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+<div class="configurador">
+  <model-viewer id="valija-pro" 
+    src="https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/retopo_go.glb" 
+    ar ar-modes="webxr scene-viewer quick-look"
+    camera-controls shadow-intensity="1"
+    style="width: 100%; height: 500px; background: #eee;">
+    
+    <button slot="ar-button" style="background: white; border-radius: 4px; border: none; position: absolute; top: 16px; right: 16px; padding: 10px;">
+      👋 Ver en tu espacio (AR)
+    </button>
+  </model-viewer>
+
+  <div class="controles">
+    <button onclick="aplicarTextura(4, 'tapa_baseColor.png')">Tapa Cemento</button>
+    <button onclick="aplicarTextura(13, 'contratapa_baseColor.png')">Contratapa Cemento</button>
+    <button onclick="aplicarTextura(10, 'Logos_baseColor.png')">Logos Cemento</button>
+    <button onclick="aplicarTextura(0, 'calco_rueda__baseColor.png')">Ruedas Cemento</button>
+  </div>
+</div>
+
+<script>
+  async function aplicarTextura(indice, nombreArchivo) {
+    const visor = document.getElementById('valija-pro');
+    if (!visor.model) return;
+
+    // URL usando Githack para evitar bloqueos
+    const url = `https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/op2/${nombreArchivo}`;
+    
+    try {
+      const textura = await visor.createTexture(url);
+      const material = visor.model.materials[indice];
+      
+      if (material.pbrMetallicRoughness.baseColorTexture) {
+        material.pbrMetallicRoughness.baseColorTexture.setTexture(textura);
+      } else {
+        // Si el material no tiene textura base, lo forzamos
+        material.pbrMetallicRoughness.baseColorTexture = { texture: textura };
+      }
+      material.pbrMetallicRoughness.setBaseColorFactor([1,1,1,1]);
+    } catch (e) {
+      console.error("Error cargando textura de GitHub", e);
+    }
+  }
+</script>
+
+<style>
+  .configurador { max-width: 800px; margin: auto; }
+  .controles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 20px; }
+  button { padding: 15px; cursor: pointer; background: #333; color: white; border: none; font-weight: bold; text-transform: uppercase; }
+</style>
