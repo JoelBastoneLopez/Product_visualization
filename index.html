@@ -3,31 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configurador Go!</title>
+    <title>Configurador Go! V5</title>
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <style>
         body { margin: 0; font-family: sans-serif; display: flex; flex-direction: column; height: 100vh; }
         .wrapper { display: flex; flex: 1; flex-direction: column; }
         model-viewer { width: 100%; flex: 1; background: #f4f4f4; }
-        .controls { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 10px; 
-            padding: 15px; 
-            background: #fff; 
-            border-top: 1px solid #ddd; 
-        }
-        button { 
-            padding: 12px; 
-            font-size: 11px; 
-            font-weight: bold; 
-            text-transform: uppercase; 
-            cursor: pointer; 
-            border: none; 
-            background: #333; 
-            color: white; 
-            border-radius: 4px;
-        }
+        .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px; background: #fff; border-top: 1px solid #ddd; }
+        button { padding: 12px; font-size: 11px; font-weight: bold; text-transform: uppercase; cursor: pointer; border: none; background: #333; color: white; border-radius: 4px; }
         button:active { background: #000; }
         .btn-reset { grid-column: span 2; background: #888; margin-top: 5px; }
     </style>
@@ -38,8 +21,7 @@
     <model-viewer id="visor" 
         src="https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/retopo_go.glb" 
         ar ar-modes="webxr scene-viewer quick-look" 
-        camera-controls 
-        shadow-intensity="1">
+        camera-controls shadow-intensity="1" exposure="1">
     </model-viewer>
 
     <div class="controls">
@@ -47,7 +29,6 @@
         <button onclick="cambiar(1, 'contratapa_baseColor.png')">Contratapa Cemento</button>
         <button onclick="cambiar(2, 'Logos_baseColor.png')">Logos Cemento</button>
         <button onclick="cambiar(4, 'tapa_baseColor.png')">Tapa Cemento</button>
-        
         <button class="btn-reset" onclick="location.reload()">Resetear Todo</button>
     </div>
 </div>
@@ -55,9 +36,8 @@
 <script>
     async function cambiar(indice, archivo) {
         const visor = document.querySelector("#visor");
-        
-        // Agregamos un parámetro de tiempo para evitar que el navegador use una versión vieja de la imagen (cache)
-        const url = `https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/${archivo}?t=${new Date().getTime()}`;
+        // Forzamos actualización de cache con el parámetro ?v=
+        const url = `https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/${archivo}?v=${new Date().getTime()}`;
         
         if (!visor.model) return;
 
@@ -66,21 +46,19 @@
             const material = visor.model.materials[indice];
             
             if (material) {
-                // Si el material tiene el mapa de normales que agregaste, esto no lo afectará, solo cambiará el color base.
+                // Reemplazo robusto para GLB con Normal Maps
                 if (material.pbrMetallicRoughness.baseColorTexture) {
                     material.pbrMetallicRoughness.baseColorTexture.setTexture(texture);
                 } else {
-                    // Si el nuevo GLB no detecta la textura base, la inyectamos
                     material.pbrMetallicRoughness.setBaseColorTexture(texture);
                 }
                 material.pbrMetallicRoughness.setBaseColorFactor([1, 1, 1, 1]);
-                console.log("Cambio exitoso en material " + indice);
+                console.log("Material " + indice + " actualizado con Normal Map preservado.");
             }
         } catch (e) {
-            console.error("Error al cargar la textura:", e);
+            console.error("Error en la carga:", e);
         }
     }
 </script>
-
 </body>
 </html>
