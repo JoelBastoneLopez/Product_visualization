@@ -3,40 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configurador Go! V5</title>
+    <title>Configurador Go! V6</title>
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        body { margin: 0; font-family: sans-serif; display: flex; flex-direction: column; height: 100vh; }
-        .wrapper { display: flex; flex: 1; flex-direction: column; }
-        model-viewer { width: 100%; flex: 1; background: #f4f4f4; }
-        .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px; background: #fff; border-top: 1px solid #ddd; }
-        button { padding: 12px; font-size: 11px; font-weight: bold; text-transform: uppercase; cursor: pointer; border: none; background: #333; color: white; border-radius: 4px; }
-        button:active { background: #000; }
-        .btn-reset { grid-column: span 2; background: #888; margin-top: 5px; }
+        body { margin: 0; 
+            font-family: 'Lato', sans-serif; 
+            height: 100vh; 
+            display: flex; 
+            overflow: hidden; }
+        
+        .configurador-container { display: flex; 
+            width: 100%; 
+            height: 100%; }
+
+        /* Visualizador a la izquierda */
+        .viewer-section { flex: 1; background: #f4f4f4; position: relative; }
+        model-viewer { width: 100%; height: 100%; }
+
+        /* Panel de controles a la derecha */
+        .controls-panel { 
+            width: 320px; 
+            background: #ffffff; 
+            border-left: 1px solid #e0e0e0; 
+            padding: 30px 20px; 
+            overflow-y: auto;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.05);
+        }
+
+        h2 { 
+            font-size: 18px; 
+            font-weight: 100;
+            letter-spacing: 1px; 
+            margin-bottom: 30px; 
+            border-bottom: 1px solid #000; 
+            padding-bottom: 10px; 
+        }
+
+        .categoria { margin-bottom: 25px; }
+        
+        .categoria-titulo { 
+            display: block; 
+            font-size: 11px; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            color: #555; 
+            margin-bottom: 12px; 
+            letter-spacing: 1px;
+        }
+
+        .opciones-botones { display: flex; gap: 12px; align-items: center; }
+
+        /* Botones Circulares */
+        .btn-circular {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 2px solid #e0e0e0; /* Gris claro solicitado */
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+            padding: 0;
+            outline: none;
+        }
+
+        .btn-circular:hover { transform: scale(1.1); border-color: #bbb; }
+        .btn-circular:active { transform: scale(0.95); }
+
+        /* Colores específicos */
+        .color-cemento { background-color: #070C11; }
+        .color-rojo { background-color: #3F0509; }
+        .color-moca { background-color: #441F15; }
+        .color-original { background-color: #B37D18; }
+
+        .btn-reset-general { 
+            display: block;        /* Necesario para que margin: auto funcione */
+            margin: 20px auto 0;   /* Arriba 20px, lados Automático, abajo 0 */
+            width: auto;           /* Se ajusta al contenido */
+            padding: 14px; 
+            background: #000; 
+            color: #fff; 
+            border: none; 
+            font-size: 14px; 
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            body { flex-direction: column; overflow: auto; }
+            .configurador-container { flex-direction: column; }
+            .controls-panel { width: 100%; border-left: none; border-top: 1px solid #e0e0e0; box-sizing: border-box; }
+        }
     </style>
 </head>
 <body>
 
-<div class="wrapper">
-    <model-viewer id="visor" 
-        src="https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/retopo_go.glb" 
-        ar ar-modes="webxr scene-viewer quick-look" 
-        camera-controls shadow-intensity="1" exposure="1">
-    </model-viewer>
+<div class="configurador-container">
+    <div class="viewer-section">
+        <model-viewer id="visor" 
+            src="https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/retopo_go.glb" 
+            ar camera-controls shadow-intensity="1" exposure="1">
+        </model-viewer>
+    </div>
 
-    <div class="controls">
-        <button onclick="cambiar(0, 'calco_rueda__baseColor.png')">Ruedas Cemento</button>
-        <button onclick="cambiar(1, 'contratapa_baseColor.png')">Contratapa Cemento</button>
-        <button onclick="cambiar(2, 'Logos_baseColor.png')">Logos Cemento</button>
-        <button onclick="cambiar(4, 'tapa_baseColor.png')">Tapa Cemento</button>
-        <button class="btn-reset" onclick="location.reload()">Resetear Todo</button>
+    <div class="controls-panel">
+        <h2>Personalización</h2>
+
+        <div class="categoria">
+            <span class="categoria-titulo">Tapa Principal</span>
+            <div class="opciones-botones">
+                <button class="btn-circular color-original" title="Original" onclick="cambiar(4, 'Image_4.png')"></button>
+                <button class="btn-circular color-cemento" title="Cemento" onclick="cambiar(4, 'tapa_baseColor.png')"></button>
+                <button class="btn-circular color-rojo" title="Rojo" onclick="cambiar(4, 'tapa_baseColor-rojo.png')"></button>
+                <button class="btn-circular color-moca" title="Moca" onclick="cambiar(4, 'tapa_baseColor-moca.png')"></button>
+            </div>
+        </div>
+
+        <div class="categoria">
+            <span class="categoria-titulo">Contratapa</span>
+            <div class="opciones-botones">
+                <button class="btn-circular color-original" title="Original" onclick="cambiar(1, 'Image_16.png')"></button>
+                <button class="btn-circular color-cemento" title="Cemento" onclick="cambiar(1, 'contratapa_baseColor.png')"></button>
+                <button class="btn-circular color-rojo" title="Rojo" onclick="cambiar(1, 'contratapa_baseColor-rojo.png')"></button>
+                <button class="btn-circular color-moca" title="Moca" onclick="cambiar(1, 'contratapa_baseColor-moca.png')"></button>
+            </div>
+        </div>
+
+        <div class="categoria">
+            <span class="categoria-titulo">Calco Ruedas</span>
+            <div class="opciones-botones">
+                <button class="btn-circular color-original" title="Original" onclick="cambiar(0, 'Image_0.png')"></button>
+                <button class="btn-circular color-cemento" title="Cemento" onclick="cambiar(0, 'calco_rueda__baseColor.png')"></button>
+                <button class="btn-circular color-rojo" title="Rojo" onclick="cambiar(0, 'calco_rueda__baseColor-rojo.png')"></button>
+                <button class="btn-circular color-moca" title="Moca" onclick="cambiar(0, 'calco_rueda__baseColor-moca.png')"></button>
+            </div>
+        </div>
+
+        <div class="categoria">
+            <span class="categoria-titulo">Logos</span>
+            <div class="opciones-botones">
+                <button class="btn-circular color-original" title="Original" onclick="cambiar(2, 'Image_8.png')"></button>
+                <button class="btn-circular color-cemento" title="Cemento" onclick="cambiar(2, 'Logos_baseColor.png')"></button>
+                <button class="btn-circular color-rojo" title="Rojo" onclick="cambiar(2, 'Logos_baseColor-rojo.png')"></button>
+                <button class="btn-circular color-moca" title="Moca" onclick="cambiar(2, 'Logos_baseColor-moca.png')"></button>
+            </div>
+        </div>
+
+        <button class="btn-reset-general" onclick="location.reload()">Volver a empezar</button>
     </div>
 </div>
 
 <script>
     async function cambiar(indice, archivo) {
         const visor = document.querySelector("#visor");
-        // Forzamos actualización de cache con el parámetro ?v=
         const url = `https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/${archivo}?v=${new Date().getTime()}`;
         
         if (!visor.model) return;
@@ -46,19 +166,18 @@
             const material = visor.model.materials[indice];
             
             if (material) {
-                // Reemplazo robusto para GLB con Normal Maps
                 if (material.pbrMetallicRoughness.baseColorTexture) {
                     material.pbrMetallicRoughness.baseColorTexture.setTexture(texture);
                 } else {
                     material.pbrMetallicRoughness.setBaseColorTexture(texture);
                 }
                 material.pbrMetallicRoughness.setBaseColorFactor([1, 1, 1, 1]);
-                console.log("Material " + indice + " actualizado con Normal Map preservado.");
             }
         } catch (e) {
-            console.error("Error en la carga:", e);
+            console.error("Error al cargar la textura:", e);
         }
     }
 </script>
+
 </body>
 </html>
