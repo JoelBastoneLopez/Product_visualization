@@ -23,6 +23,8 @@
         .viewer-section { flex: 1; background: #f4f4f4; position: relative; }
         model-viewer { width: 100%; height: 100%; }
 
+        
+
         /* Panel de controles a la derecha */
         .controls-panel { 
             width: 320px; 
@@ -77,11 +79,7 @@
         .color-moca { background-color: #441F15; }
         .color-original { background-color: #B37D18; }
 
-        .viewer-section {
-    flex: 1;
-    background: #f4f4f4;
-    position: relative; /* Importante para que el logo se posicione respecto a esto */
-}
+        
 
 .watermark {
     position: absolute;
@@ -117,12 +115,9 @@
 
 <div class="configurador-container">
     <div class="viewer-section">
-        <div class="viewer-section">
+
             <img src="https://raw.githubusercontent.com/JoelBastoneLopez/Product_visualization/main/primicia-lab-logo.png" class="watermark">
-    
-            <model-viewer id="visor" ...>
-             </model-viewer>
-        </div>
+
         <model-viewer id="visor" 
             src="https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/retopo_go.glb" 
             ar camera-controls shadow-intensity="1" exposure="1">
