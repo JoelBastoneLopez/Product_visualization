@@ -137,32 +137,35 @@
 		},
 		{
 			"name":"resto",
-			"occlusionTexture":{
+			"normalTexture":{
 				"index":7
+			},
+			"occlusionTexture":{
+				"index":8
 			},
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":8
+					"index":9
 				},
 				"metallicRoughnessTexture":{
-					"index":7
+					"index":8
 				}
 			}
 		},
 		{
 			"name":"tapa",
 			"normalTexture":{
-				"index":9
+				"index":10
 			},
 			"occlusionTexture":{
-				"index":10
+				"index":11
 			},
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":11
+					"index":12
 				},
 				"metallicRoughnessTexture":{
-					"index":10
+					"index":11
 				}
 			}
 		}
@@ -287,6 +290,10 @@
 		{
 			"sampler":0,
 			"source":11
+		},
+		{
+			"sampler":0,
+			"source":12
 		}
 	],
 	"images":[
@@ -324,6 +331,11 @@
 			"mimeType":"image/png",
 			"name":"Image_8",
 			"uri":"Image_8.png"
+		},
+		{
+			"mimeType":"image/png",
+			"name":"resto_normal",
+			"uri":"resto_normal.png"
 		},
 		{
 			"mimeType":"image/png",
