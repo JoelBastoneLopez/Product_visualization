@@ -77,6 +77,22 @@
         .color-moca { background-color: #441F15; }
         .color-original { background-color: #B37D18; }
 
+        .viewer-section {
+    flex: 1;
+    background: #f4f4f4;
+    position: relative; /* Importante para que el logo se posicione respecto a esto */
+}
+
+.watermark {
+    position: absolute;
+    bottom: 20px;   /* Distancia desde abajo */
+    left: 20px;     /* Distancia desde la izquierda (o usa 'right' para la derecha) */
+    width: 120px;   /* Tamaño del logo */
+    opacity: 0.3;   /* Baja opacidad (0.3 = 30%) */
+    pointer-events: none; /* Hace que el logo sea "invisible" a los clics para no trabar el 3D */
+    z-index: 10;    /* Lo pone por encima del visor */
+}
+
         .btn-reset-general { 
             display: block;        /* Necesario para que margin: auto funcione */
             margin: 20px auto 0;   /* Arriba 20px, lados Automático, abajo 0 */
