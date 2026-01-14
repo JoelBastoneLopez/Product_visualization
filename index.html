@@ -55,8 +55,9 @@
 <script>
     async function cambiar(indice, archivo) {
         const visor = document.querySelector("#visor");
-        // Ajustado para buscar los archivos PNG en la raíz del repo
-        const url = `https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/${archivo}`;
+        
+        // Agregamos un parámetro de tiempo para evitar que el navegador use una versión vieja de la imagen (cache)
+        const url = `https://raw.githack.com/JoelBastoneLopez/Product_visualization/main/${archivo}?t=${new Date().getTime()}`;
         
         if (!visor.model) return;
 
@@ -65,9 +66,11 @@
             const material = visor.model.materials[indice];
             
             if (material) {
+                // Si el material tiene el mapa de normales que agregaste, esto no lo afectará, solo cambiará el color base.
                 if (material.pbrMetallicRoughness.baseColorTexture) {
                     material.pbrMetallicRoughness.baseColorTexture.setTexture(texture);
                 } else {
+                    // Si el nuevo GLB no detecta la textura base, la inyectamos
                     material.pbrMetallicRoughness.setBaseColorTexture(texture);
                 }
                 material.pbrMetallicRoughness.setBaseColorFactor([1, 1, 1, 1]);
@@ -81,4 +84,3 @@
 
 </body>
 </html>
-
