@@ -2401,12 +2401,15 @@
 			"normalTexture":{
 				"index":19
 			},
+			"occlusionTexture":{
+				"index":20
+			},
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":20
+					"index":21
 				},
 				"metallicRoughnessTexture":{
-					"index":21
+					"index":20
 				}
 			}
 		},
@@ -3386,13 +3389,13 @@
 		},
 		{
 			"mimeType":"image/jpeg",
-			"name":"Logos_baseColor",
-			"uri":"Logos_baseColor.jpg"
+			"name":"Logos_occlusionRoughnessMetallic",
+			"uri":"Logos_occlusionRoughnessMetallic.jpg"
 		},
 		{
 			"mimeType":"image/jpeg",
-			"name":"Logos_occlusionRoughnessMetallic",
-			"uri":"Logos_occlusionRoughnessMetallic.jpg"
+			"name":"Logos_baseColor",
+			"uri":"Logos_baseColor.jpg"
 		},
 		{
 			"mimeType":"image/jpeg",
