@@ -2282,9 +2282,12 @@
 				"index":6
 			},
 			"pbrMetallicRoughness":{
-				"baseColorTexture":{
-					"index":7
-				},
+				"baseColorFactor":[
+					0.6038273572921753,
+					0.6038273572921753,
+					0.6038273572921753,
+					1
+				],
 				"metallicRoughnessTexture":{
 					"index":6
 				}
@@ -2303,17 +2306,17 @@
 			},
 			"name":"bolso_grande",
 			"normalTexture":{
-				"index":8
+				"index":7
 			},
 			"occlusionTexture":{
-				"index":9
+				"index":8
 			},
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":10
+					"index":9
 				},
 				"metallicRoughnessTexture":{
-					"index":9
+					"index":8
 				}
 			}
 		},
@@ -2331,7 +2334,7 @@
 			"name":"calco_rueda_",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":11
+					"index":10
 				},
 				"metallicFactor":0,
 				"roughnessFactor":0.1752236783504486
@@ -2350,17 +2353,17 @@
 			},
 			"name":"cierre",
 			"normalTexture":{
-				"index":12
+				"index":11
 			},
 			"occlusionTexture":{
-				"index":13
+				"index":12
 			},
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":14
+					"index":13
 				},
 				"metallicRoughnessTexture":{
-					"index":13
+					"index":12
 				}
 			}
 		},
@@ -2377,17 +2380,17 @@
 			},
 			"name":"cerraduras",
 			"normalTexture":{
-				"index":15
+				"index":14
 			},
 			"occlusionTexture":{
-				"index":16
+				"index":15
 			},
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":17
+					"index":16
 				},
 				"metallicRoughnessTexture":{
-					"index":16
+					"index":15
 				}
 			}
 		},
@@ -2404,17 +2407,17 @@
 			},
 			"name":"contratapa",
 			"normalTexture":{
-				"index":18
+				"index":17
 			},
 			"occlusionTexture":{
-				"index":19
+				"index":18
 			},
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":20
+					"index":19
 				},
 				"metallicRoughnessTexture":{
-					"index":19
+					"index":18
 				}
 			}
 		},
@@ -2431,17 +2434,17 @@
 			},
 			"name":"cintas_broche",
 			"normalTexture":{
-				"index":21
+				"index":20
 			},
 			"occlusionTexture":{
-				"index":22
+				"index":21
 			},
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":23
+					"index":22
 				},
 				"metallicRoughnessTexture":{
-					"index":22
+					"index":21
 				}
 			}
 		},
@@ -2458,17 +2461,17 @@
 			},
 			"name":"resto",
 			"normalTexture":{
-				"index":24
+				"index":23
 			},
 			"occlusionTexture":{
-				"index":25
+				"index":24
 			},
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":26
+					"index":25
 				},
 				"metallicRoughnessTexture":{
-					"index":25
+					"index":24
 				}
 			}
 		},
@@ -2485,17 +2488,17 @@
 			},
 			"name":"tapa",
 			"normalTexture":{
-				"index":27
+				"index":26
 			},
 			"occlusionTexture":{
-				"index":28
+				"index":27
 			},
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":29
+					"index":28
 				},
 				"metallicRoughnessTexture":{
-					"index":28
+					"index":27
 				}
 			}
 		},
@@ -2512,17 +2515,17 @@
 			},
 			"name":"telas",
 			"normalTexture":{
-				"index":30
+				"index":29
 			},
 			"occlusionTexture":{
-				"index":31
+				"index":30
 			},
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":32
+					"index":31
 				},
 				"metallicRoughnessTexture":{
-					"index":31
+					"index":30
 				}
 			}
 		}
@@ -3266,11 +3269,11 @@
 		},
 		{
 			"sampler":0,
-			"source":28
+			"source":13
 		},
 		{
 			"sampler":0,
-			"source":14
+			"source":28
 		},
 		{
 			"sampler":0,
@@ -3279,10 +3282,6 @@
 		{
 			"sampler":0,
 			"source":30
-		},
-		{
-			"sampler":0,
-			"source":31
 		}
 	],
 	"images":[
@@ -3320,11 +3319,6 @@
 			"mimeType":"image/jpeg",
 			"name":"Logos_occlusionRoughnessMetallic",
 			"uri":"Logos_occlusionRoughnessMetallic.jpg"
-		},
-		{
-			"mimeType":"image/jpeg",
-			"name":"Logos_lienzoColor",
-			"uri":"Logos_lienzoColor.jpg"
 		},
 		{
 			"mimeType":"image/jpeg",
